@@ -22,7 +22,7 @@ const int calVal_eepromAdress = 0;
 unsigned long t = 0;
 
 void setup() {
-  Serial.begin(57600); delay(10);
+  Serial.begin(9600); delay(10);
   Serial.println();
   Serial.println("Starting...");
   Serial.println("Press 1 to Start or Calibrate the Angle Sensor or press t to zero the load cell");
