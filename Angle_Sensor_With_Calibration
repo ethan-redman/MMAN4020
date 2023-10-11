@@ -1,0 +1,38 @@
+include <Wire.h> // Must include Wire library for I2C
+#include <SparkFun_MMA8452Q.h> // Includes the SFE_MMA8452Q library
+#include <math.h>
+MMA8452Q accel;
+bool readin = false;
+float angle;
+int starting_angle = 0;
+// The setup function simply starts serial and initializes the
+//  accelerometer.
+void setup()
+{
+  Serial.begin(9600);
+  Serial.println("Tilt Sensor Code Begins!");
+  Serial.println("Press 1 to Start or Calibrate");
+  accel.init();
+}
+// The loop function will simply check for new data from the
+//  accelerometer and print it out if it's available.
+void loop()
+{
+  // Use the accel.available() function to wait for new data
+  //  from the accelerometer.
+  if(Serial.read() == '1'){
+    readin = true;
+    starting_angle = atan(accel.cz/sqrt(pow(accel.cx,2) + pow(accel.cy,2)))*180/M_PI;
+    Serial.println("Sensor has been successfully calibrated!");
+  }
+  if(readin){
+    if (accel.available())
+    {
+      accel.read();
+      angle = atan(accel.cz/sqrt(pow(accel.cx,2) + pow(accel.cy,2)))*180/M_PI - starting_angle;
+      Serial.println(angle,3);
+      Serial.println(); 
+    }
+  }
+  delay(1000);
+}
