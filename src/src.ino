@@ -40,7 +40,7 @@ void setup() {
   Serial.println("Starting Angle Sensor calibration...");
   startingAngle = atan(accel.cz/sqrt(pow(accel.cx,2) + pow(accel.cy,2)))*180/M_PI;
   Serial.println("Angle Sensor has been successfully calibrated!");
-  Serial.println("Please begin Excel data stream. No other instructions will be printed to the Serial Monitor. Enter '1' in the Serial Monitor to begin Excel data stream:");
+  Serial.println("Please begin Excel data stream. No other instructions will be printed to the Serial Monitor.");
   //LoadCell.setReverseOutput(); //uncomment to turn a negative output value to positive
 }
 bool streamStart = false;
