@@ -15,7 +15,7 @@ int startingAngle = 0;
 // LOAD CELL
 HX711_ADC LoadCell(HX711_dout, HX711_sck);
 double loadCellData;
-float calibrationValue = 96.14;
+float calibrationValue = 75.84;
 // FIRST 16 VALUES MUST BE REMOVED
 
 // OTHER
@@ -59,17 +59,8 @@ void setup() {
   delay(5000);
   //LoadCell.setReverseOutput(); //uncomment to turn a negative output value to positive
 }
-bool streamStart = false;
+
 void loop() {
-  // Check for calibration start
-  if (Serial.available()) {
-    if (Serial.read() == '1') {
-      streamStart = true;
-    } 
-  } //if (!streamStart) { return; }
-
-  // check for new data/start next conversion:
-
   // get smoothed value from the dataset:
   if (millis() > t + serialPrintInterval) {
     newDataReady = true;
